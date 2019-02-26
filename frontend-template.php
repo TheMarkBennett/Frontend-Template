@@ -19,34 +19,46 @@ include( plugin_dir_path( __FILE__ ) . 'include/cpt-template.php');
 //ACF
 include( plugin_dir_path( __FILE__ ) . 'include/acf.php');
 
+//change the_content fillter
+include( plugin_dir_path( __FILE__ ) . 'include/cpt-template-replace-cotent.php');
+
 //Include ACF Javascript
 function cpt_template_my_admin_enqueue_scripts() {
 
-	wp_enqueue_script( 'cpt_template-admin-js', plugin_dir_url( __FILE__ ) . 'include/js/cpt-template-select.js', array(), '1.0.0', true );
-  wp_localize_script( 'my_ajax_filter_search', 'ajax_url', admin_url('admin-ajax.php') );
+	wp_enqueue_script( 'cpt_template_admin_js', plugin_dir_url( __FILE__ ) . 'include/js/cpt-template-select.js', array(), '1.0.0', true );
+  wp_localize_script('cpt_template_admin_js', 'ajax_url',
+     array(
+         'ajaxurl' => admin_url('admin-ajax.php'),
+
+     )
+);
 
 }
 
-add_action('acf/input/admin_enqueue_scripts', 'cpt_template_my_admin_enqueue_scripts');
+add_action('acf/input/admin_enqueue_scripts', 'cpt_template_my_admin_enqueue_scripts'); //add javascript to the admin ares
 
 
 function more_post_ajax(){
-    $offset = $_POST["offset"];
-    $ppp = $_POST["ppp"];
-    $post_type;
+        $post_type = $_POST["post_type"];
     header("Content-Type: text/html");
 
     $args = array(
-        'post_type' => 'post',
+        'post_type' => $post_type,
         'posts_per_page' => -1,
-        //'cat' => 1,
-        //'offset' => $offset,
     );
 
     $loop = new WP_Query($args);
-    while ($loop->have_posts()) { $loop->the_post();
-       the_title();
+		ob_start();
+    while ($loop->have_posts()) { $loop->the_post();?>
+			<option value="<?php the_ID(); ?>"><?php the_title(); ?></option>
+<?php
     }
+
+		$posts_html = ob_get_contents(); // we pass the posts to variable
+   		ob_end_clean(); // clear the buffer
+
+			echo $posts_html;
+
 
     exit;
 }

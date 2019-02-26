@@ -38,9 +38,6 @@ $cpt = the_field('cpt_template_post_type');
 	'post_type' => $cpt,
 
   );
-
-
-
 	// return
     return $args;
 
