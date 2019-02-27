@@ -59,3 +59,118 @@ function UCF_cpt_template_creator() {
 add_action( 'init', 'UCF_cpt_template_creator', 0 );
 
 }
+
+
+
+function my_acf_add_local_field_groups() {
+
+	acf_add_local_field_group(array(
+		'key' => 'group_5c70e8ddcd78d',
+		'title' => 'CPT Template',
+		'fields' => array(
+			array(
+				'key' => 'field_5c70e9dadff60',
+				'label' => 'Custom Post Type',
+				'name' => 'cpt_template_post_type',
+				'type' => 'select',
+				'instructions' => 'Select the custom post type you\'d like to edit.',
+				'required' => 1,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'post' => 'Post',
+					'page' => 'Page',
+					'attachment' => 'Media',
+					'ucf_cpt_template' => 'CPT Template',
+					'initiatives' => 'Initiative',
+					'person' => 'Person',
+					'ucf_section' => 'Section',
+					'ucf_spotlight' => 'Spotlight',
+					'shortcode' => 'Shortcode',
+				),
+				'default_value' => array(
+				),
+				'allow_null' => 0,
+				'multiple' => 0,
+				'ui' => 0,
+				'return_format' => 'value',
+				'ajax' => 0,
+				'placeholder' => '',
+			),
+			array(
+				'key' => 'field_5c70ea64dff61',
+				'label' => 'Custom Post Type Templates',
+				'name' => 'cpt_template_style',
+				'type' => 'checkbox',
+				'instructions' => 'Select if you want to change the individual page or archive page',
+				'required' => 1,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+					'single' => 'Single',
+					'archive' => 'Archive',
+				),
+				'allow_custom' => 0,
+				'default_value' => array(
+				),
+				'layout' => 'horizontal',
+				'toggle' => 0,
+				'return_format' => 'value',
+				'save_custom' => 0,
+			),
+			array(
+				'key' => 'field_5c710f16c0868',
+				'label' => 'Select which page to pull the content from (for development purpose)',
+				'name' => 'cpt_template_demo_page',
+				'type' => 'select',
+				'instructions' => 'Select a page you want to get the content from. This allows you to see how the would look from this page',
+				'required' => 0,
+				'conditional_logic' => 0,
+				'wrapper' => array(
+					'width' => '',
+					'class' => '',
+					'id' => '',
+				),
+				'choices' => array(
+				),
+				'default_value' => array(
+				),
+				'allow_null' => 0,
+				'multiple' => 0,
+				'ui' => 1,
+				'ajax' => 0,
+				'return_format' => 'value',
+				'placeholder' => '',
+			),
+		),
+		'location' => array(
+			array(
+				array(
+					'param' => 'post_type',
+					'operator' => '==',
+					'value' => 'ucf_cpt_template',
+				),
+			),
+		),
+		'menu_order' => 0,
+		'position' => 'normal',
+		'style' => 'default',
+		'label_placement' => 'top',
+		'instruction_placement' => 'label',
+		'hide_on_screen' => '',
+		'active' => true,
+		'description' => '',
+	));
+
+
+}
+
+add_action('acf/init', 'my_acf_add_local_field_groups');

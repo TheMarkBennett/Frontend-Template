@@ -11,6 +11,7 @@ $args = array(
 	'post_type'              => array( 'ucf_cpt_template' ),
 	'post_status'            => array( 'publish' ),
 	'orderby'                => 'menu_order',
+  'posts_per_page'         => 1,
   'meta_query'             => array(
       		'relation' => 'OR',
       		array(
@@ -30,7 +31,7 @@ if ( $query->have_posts() ) {
 		$query->the_post();
 		// do something
 		//$content = "Post Name: " . get_the_title() . " Post ID: " . get_the_ID();
-    $content .= get_the_content();
+    $content = get_the_content();
 	}
 } else {
 	// no posts found

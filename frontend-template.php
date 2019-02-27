@@ -2,8 +2,8 @@
 /**
  * Plugin Name: UCF Custom Post Type Templates
  * Plugin URI:  https://developer.wordpress.org/plugins/the-basics/
- * Description: Design custom post type templates from the frontend
- * Version:     1.0.0
+ * Description: Design custom post type templates. It is recommeded to use <a href="https://wordpress.org/plugins/custom-content-shortcode/">Custom Content Shortcode</a>. Custom Content Shortcode is a set of commands to display content where you need.
+ * Version:     1.0.1
  * Author:      Mark Bennett
  * Author URI:  https://developer.wordpress.org/
  * Text Domain: ucf_cpt
