@@ -23,7 +23,17 @@ include( plugin_dir_path( __FILE__ ) . 'include/acf.php');
 include( plugin_dir_path( __FILE__ ) . 'include/cpt-template-replace-cotent.php');
 
 //Include ACF Javascript
-function cpt_template_my_admin_enqueue_scripts() {
+function cpt_template_my_admin_enqueue_scripts($hook, $post_type) {
+
+    global $post_type;
+    if( 'ucf_cpt_template' != $post_type ){
+        return;
+
+    }
+
+    if ( 'edit.php' != $hook ) {
+        return;
+    }
 
 	wp_enqueue_script( 'cpt_template_admin_js', plugin_dir_url( __FILE__ ) . 'include/js/cpt-template-select.js', array(), '1.0.0', true );
   wp_localize_script('cpt_template_admin_js', 'ajax_url',
